@@ -1,31 +1,33 @@
 package com.will;
 
-import java.awt.*;
 import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        int[] numbers = {2, 3, 4, 1, 4};
-        int[][] number = {{1,2,3}, {4,5,6}};
-        final float PI = 3.14F;
-        double result = (double)10 / (double)3;
-        short x = 1;
-        int y = x + 2;
-        int result2 = Math.round(1.1F);
-        System.out.println(result2);
+        final byte MONTHS_IN_YEAR = 12;
+        final byte PERCENT = 100;
 
-        NumberFormat currency = NumberFormat.getCurrencyInstance();
-        String result3 = currency.format(1234567.891);
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("currency:" + result3);
+        System.out.println("Principal: ");
+        int principal = scanner.nextInt();
+
+        System.out.print("Annual Interest Rate: ");
+        float annualInterest = scanner.nextFloat();
+        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+
+        System.out.print("Period (Years): ");
+        byte years = scanner.nextByte();
+        int numberOfPayments = years * MONTHS_IN_YEAR;
+
+        double mortgage = principal * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments)) / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+
+        String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
+        System.out.println("Mortgage: " + mortgageFormatted);
 
 
-
-        System.out.println(Arrays.deepToString(number));
-        System.out.println(result);;
     }
 }
